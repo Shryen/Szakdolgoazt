@@ -13,7 +13,6 @@ return new class extends Migration
             $table->foreignId('author_id')->constrained('users')->cascadeOnDelete();
             $table->string('title');
             $table->text('content');
-            $table->foreignId('school_class_id')->nullable()->constrained('school_classes')->nullOnDelete();
             $table->timestamps();
         });
     }

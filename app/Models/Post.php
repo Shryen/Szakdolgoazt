@@ -10,16 +10,10 @@ class Post extends Model
         'author_id',
         'title',
         'content',
-        'school_class_id',
     ];
 
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
-    }
-
-    public function schoolClass()
-    {
-        return $this->belongsTo(SchoolClass::class);
     }
 }

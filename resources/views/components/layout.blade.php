@@ -10,8 +10,8 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/">Kezdőlap</a></li>
-            <li><a href="/">Hírfolyam</a></li>
+            <li><a href="/dashboard">Kezdőlap</a></li>
+            <li><a href="/feeds">Hírfolyam</a></li>
         </ul>
     </nav>
     {{$slot}}
