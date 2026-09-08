@@ -1,3 +1,3 @@
 <x-layout>
-    <h1></h1>
+    <h1>Üdv itt {{$user->first_name}}!</h1>
 </x-layout>

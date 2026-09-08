@@ -94,4 +94,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(SchoolClass::class, 'head_teacher_id');
     }
+
+    public function posts(){
+        return $this->hasMany(Post::class, 'author_id');
+    }
 }

@@ -36,7 +36,7 @@ class UserController extends Controller
             // Sikeres belépés esetén rögzítjük a munkamenetet a Session Fixation támadások ellen
             $request->session()->regenerate(); 
             
-            return redirect()->intended('dashboard');
+            return redirect()->intended('kezdolap');
         }
 
         return back()->withErrors([

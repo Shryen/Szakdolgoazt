@@ -1,24 +1,194 @@
+/*
+    Variables
+*/
+
+:root{
+    --main-color: #4338CA; /* Navigáció, gombok */
+    --active: #F59E0B; /* Bármi ami aktív, linkek, interaktív elemek */
+    --background: #F9FAFB;
+    --cards: #F1F5F9;
+    --text: #0F172A;
+    --hover: wheat;
+
+    --button-hover: #3730A3;
+    --card-shadow: 0px 10px 16px 5px rgba(0, 0, 0, 0.5);
+    --button-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.5);
+
+    --title-font-size: 24pt;
+    --font-size: 16pt;
+}
+
 *{
     margin: 0;
     padding: 0;
     text-decoration: none;
     box-sizing: border-box;
+    list-style: none;
 }
 
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
+
+/* FORM START */
+
 form{
     display: flex;
     flex-direction: column;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+
+    border-radius: 10px;
     padding: 10px;
-    gap: 10px;
+    
+    box-shadow: var(--card-shadow);
+
+    gap: 1rem;
+
+    min-height: 40%;
+    min-width: 20%;
+
+    background-color: var(--cards);
+}
+
+form > h1{
+    font-size: var(--title-font-size);
+}
+
+form > input{
+    width: 80%;
+    padding: 10px;
+    font-size: var(--font-size);
+    border-radius: 5px;
+    border: none;
+    outline: 1px solid black;
+}
+
+form > textarea{
+    width: 80%;
+    padding: 10px;
+    font-size: var(--font-size);
+    border-radius: 5px;
+    border: none;
+    outline: 1px solid black;
+}
+
+/* FORM END */
+
+
+
+button{
+    padding: 15px;
+    min-width: 150px;
+    font-size: 14pt;
+    font-weight: bold;
+
+    background: var(--main-color);
+    color: var(--background);
+    
+    box-shadow: var(--button-shadow);
+    border-radius: 5px;
+    
+    cursor: pointer;
+
+    transition: .2s all ease;
+}
+
+button:hover{
+    background-color: var(--button-hover);
+}
+
+
+
+/* NAV START */
+
+nav{
+    position: fixed;
+    top:0;
+    
+    align-items: center;
+
+    background-color: var(--main-color);
+    border-bottom: 1px solid black;
+
+    width: 100%;
+    padding: 1rem;
+    
+    text-decoration: none;
+    
+}
+
+nav > ul{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+nav > ul > li > a{
+    display: inline-block;
+    color: var(--background);
+    transition: .2s all ease-in-out;
+    padding: 5px;
+}
+
+nav > ul > li > a:hover, nav > ul > li > a:hover:focus{
+    color: var(--hover);
+    animation: jump 0.4s ease-in-out;
+}
+
+/* NAV END */
+
+
+/* POSTS START */
+
+.posts{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 80%;
+}
+
+.post-card{
+    width: 350px;
+    border: 1px solid black;
+}
+
+.post-card > p{
+    display: -webkit-box;
+    line-clamp: 1; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    font-size: var(--font-size);
+}
+
+/* POSTS END */
+
+
+/*
+    keyframes (animations)
+*/
+
+@keyframes jump {
+        0% {
+            transform: scale(1.0);
+            -webkit-transform: scale(1.0);
+        }
+        50% {
+            transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+        }
+        100%{
+             transform: scale(1.0);
+            -webkit-transform: scale(1.0);
+        }
 }
