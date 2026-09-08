@@ -6,8 +6,9 @@
     <div class="posts">
         @foreach($posts as $post)
             <div class="post-card">
-                <p>{{$post->title}}</p>
-                <p>{{$post->content}}</p>
+                <p class="feed-post-author">{{$post->author?->first_name}}</p>
+                <p class="feed-post-title"><a href="/hirfolyam/{{$post->id}}">{{$post->title}}</a></p>
+                <p class="feed-post-content">{{$post->content}}</p>
             </div>
         @endforeach
     </div>

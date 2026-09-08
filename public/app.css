@@ -11,8 +11,10 @@
     --hover: wheat;
 
     --button-hover: #3730A3;
-    --card-shadow: 0px 10px 16px 5px rgba(0, 0, 0, 0.5);
+    --card-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.5);
     --button-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.5);
+
+    --content-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
 
     --title-font-size: 24pt;
     --font-size: 16pt;
@@ -151,24 +153,109 @@ nav > ul > li > a:hover, nav > ul > li > a:hover:focus{
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     max-width: 80%;
+
+    place-items: center;
 }
 
 .post-card{
-    width: 350px;
+    max-width: 300px;
     border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: var(--card-shadow);
+    background-color: var(--background);
 }
 
 .post-card > p{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
     display: -webkit-box;
-    line-clamp: 1; 
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    overflow-wrap: anywhere;
+}
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    
-    font-size: var(--font-size);
+.post-card:nth-child(1) {
+    grid-column: span 3;
+    width: 80%;
+}
+
+.post-card:nth-child(2){
+    grid-column: span 2;
+    width: 40%;
+}
+
+.feed-post-author{
+    font-size: 12pt;
+    font-style: italic;
+}
+
+.feed-post-title{
+    font-size: 18pt;
+    font-weight: bold;
+    border-bottom: 1px solid var(--main-color);
+
+    color: var(--main-color);
+    margin-bottom: 10px;
+}
+
+.feed-post-content{
+    padding-bottom: 10px;
+}
+
+/* A post amit megnyitott a felhasználó, tehát nem ami a főoldalon van kilistázva */
+.post{
+    display: flex;
+    justify-content: center;
+    box-shadow: var(--content-shadow);
+    outline: 2px solid var(--main-color);
+    border-radius: 3px;
+    height: 50%;
+}
+
+.post-sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 20%;
+    border-right: 1px solid var(--main-color);
+    padding: 1rem;
+    background-color: var(--background);
+}
+
+.post-sidebar > div > h1{
+    color: var(--main-color);
+    padding-bottom: 2px;
+}
+
+.post-sidebar > div > a{ /* Vissza gomb */
+    display: block;
+    text-align: center;
+    font-size: 14pt;
+    background-color: var(--main-color);
+    color: var(--background);
+    border-radius: 5px;
+    width: fit-content;
+    text-align: center;
+    padding: 10px;
+transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.post-sidebar > div > a:hover, .post-sidebar>div>a:focus{
+    background-color: var(--button-hover);  
+    transform: scale(1.2);
+}
+
+.post-date{
+    font-style: italic;
+    font-size: 10pt;
+}
+
+.post-content{
+    padding: 1rem;
+    white-space: pre-line;
 }
 
 /* POSTS END */
@@ -191,4 +278,15 @@ nav > ul > li > a:hover, nav > ul > li > a:hover:focus{
              transform: scale(1.0);
             -webkit-transform: scale(1.0);
         }
+}
+
+@keyframes scale{
+    0%{
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+    100%{
+        transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+    }
 }

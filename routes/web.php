@@ -32,3 +32,7 @@ Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/hirfolyam', [PostController::class, 'index']);
 Route::get('/hirfolyam/letrehozas', [PostController::class, 'create']);
 Route::post('/hirfolyam', [PostController::class,'store']);
+Route::get('/hirfolyam/{post}', [PostController::class, 'show']); //{post} paraméterként mert nem id alapján, hanem model alapján keresünk
+Route::get('/hirfolyam/szerkesztes/{post}', [PostController::class, 'edit']);
+Route::put('/hirfolyam/szerkeszt/{post}', [PostController::class, 'update']);
+Route::get('/hirfolyam/torles/{post}', [PostController::class, 'destroy']);
