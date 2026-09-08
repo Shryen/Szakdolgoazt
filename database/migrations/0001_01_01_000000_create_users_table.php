@@ -15,16 +15,21 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('mothers_name');
+            $table->string('address');
+            $table->string('om_id', 20)->unique();
             $table->string('username')->unique();
             $table->enum('role', ['admin', 'teacher', 'student']);
-            $table->unsignedBigInteger('school_class_id')->nullable();
+            $table->foreignId('school_class_id')->nullable()->nullOnDelete();            
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
-             Schema::create('sessions', function (Blueprint $table) {
+
+
+        Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
