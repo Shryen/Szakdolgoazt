@@ -1,3 +1,5 @@
 <x-layout>
-    <a href="/hirfolyam/letrehozas">Hír létrehozása</a>
+    <x-admin>
+        
+    </x-admin>
 </x-layout>

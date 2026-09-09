@@ -60,7 +60,7 @@ class User extends Authenticatable
         return $this->belongsTo(SchoolClass::class);
     }
 
-    public function gradesReceived()
+    public function grades()
     {
         return $this->hasMany(Grade::class, 'student_id');
     }

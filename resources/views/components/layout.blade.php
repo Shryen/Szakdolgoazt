@@ -8,12 +8,22 @@
     <title>E-napló</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/kezdolap">Kezdőlap</a></li>
-            <li><a href="/hirfolyam">Hírfolyam</a></li>
-        </ul>
-    </nav>
+    @auth
+        <nav>
+            <ul>
+                <li><a href="/kezdolap">Kezdőlap</a></li>
+                <li><a href="/hirfolyam">Hírfolyam</a></li>
+            </ul>
+            <ul>
+                <li><a href="">{{auth()->user()->first_name}}</a></li>
+                <li><a href="/logout">Kijelentkezés</a></li>
+                @if(auth()->user()->username === 'Admin')
+                    <li><a href="/admin">Admin panel</a></li>
+                @endif 
+            </ul>
+        </nav>
+    @endauth
+
     {{$slot}}
 </body>
 </html>

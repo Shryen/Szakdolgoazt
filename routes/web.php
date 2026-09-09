@@ -3,6 +3,8 @@
 use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GradeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +22,7 @@ Route::get('/register', function(){
 });
 Route::post('/register', [UserController::class, 'store']);
 Route::post('/login', [UserController::class, 'login']);
+Route::get('/logout', [UserController::class, 'logout']);
 
 // Admin
 Route::get('/admin', [AdminController::class, 'index']);
@@ -32,3 +35,9 @@ Route::get('/hirfolyam/{post}', [PostController::class, 'show']); //{post} param
 Route::get('/hirfolyam/szerkesztes/{post}', [PostController::class, 'edit']);
 Route::put('/hirfolyam/szerkeszt/{post}', [PostController::class, 'update']);
 Route::get('/hirfolyam/torles/{post}', [PostController::class, 'destroy']);
+
+
+// Grades
+Route::get('/jegyek', [GradeController::class, 'index']);
+Route::get('/jegyek/{id}', [GradeController::class, 'showClass']);
+Route::get('/jegyek/{classId}/{studentId}', [GradeController::class, 'show']);

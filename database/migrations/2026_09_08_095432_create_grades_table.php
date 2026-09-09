@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('subject_id')->constrained('subjects')->cascadeOnDelete();
+            $table->string('month');
             $table->unsignedTinyInteger('grade_value');
             $table->string('description')->nullable();
             $table->date('issued_at');

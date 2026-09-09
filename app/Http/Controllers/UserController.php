@@ -43,4 +43,14 @@ class UserController extends Controller
             'username' => 'A megadott hitelesítő adatok nem megfelelőek.',
          ]);
     }
+
+    public function logout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
 }
