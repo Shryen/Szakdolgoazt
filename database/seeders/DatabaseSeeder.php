@@ -48,5 +48,10 @@ class DatabaseSeeder extends Seeder
                 'password' => 'password',
             ]
         );
+
+        $this->call([
+            UsersSeeder::class,
+            LessonsSeeder::class,
+        ]);
     }
 }
