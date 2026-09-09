@@ -9,10 +9,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', function(){
-    return view('admin.register');
-});
-
 Route::get('/kezdolap', function(){
     $user = Auth::user();
     return view('dashboard', compact('user'));
