@@ -1,9 +1,33 @@
 <x-layout>
     @php
-        $grades = $gradesByMonthAndSubject['grades'];
-        $subjects = $gradesByMonthAndSubject['subjects'];
+        $grades = $gradesByMonthAndSubject['grades']; // jegyek alapján keresünk
+        $subjects = $gradesByMonthAndSubject['subjects']; // tantárgyak alapján keresünk
         $cellID = 0;
     @endphp
+    
+    <h1>Útmutató</h1>
+    <p class="grade-alert">Ne felejtsen el a mentés gombra kattintani!</p>
+    <p onclick="ShowHelp()" id="helpText">Útmutató megjelenítése</p>
+    <div class="grade-header" id="help">
+        <div>
+            <h2>Jegy hozzáadása</h2>
+            <hr>
+            <p>Jegyek hozzáádasához kattintson a + gombra a táblázaton belül a kívánt tantrágyra és a kívánt hónapra.</p>
+            <p>Írja be az értékelést az első mezőbe majd az indoklást a második mezőbe (pl.: Témazáró).</p>
+        </div>
+        <div>
+            <h2>Jegy szerkesztése</h2>
+            <hr>
+            <p>Jegy szerkesztéséhez kattintson a már meglévő jegyre és válassza ki, hogy szerkeszteni szeretné.</p>
+            <p>A mezőben jelen lesz az eredeti jegy, amit át kell írni az új jegyre, majd a mentés gombra kattintani.</p>
+        </div>
+        <div>
+            <h2>Jegy törlése</h2>
+            <hr>
+            <p>A jegy törléséhez kattintosn a már meglévő jegyre és válassza a törlés gombot.</p>
+            <p>Ha bizonyos abban, hogy jó jegyet választott ki, erősítse meg döntését.</p>
+        </div>
+    </div>
 
     <div class="grades-table-wrapper">
         <table class="grades-table">
@@ -58,10 +82,10 @@
 
     function SelectCell(subjectID, subjectName, subjectMonth, grade){
         //TODO: Select the cell and decide what to do, for now just add grades
-       PopUpWindow(subjectID, subjectName, subjectMonth, grade);
+       AddElementWindow(subjectID, subjectName, subjectMonth, grade);
     }
 
-    function PopUpWindow(subjectId, subjectName, subjectMonth, grade){
+    function AddElementWindow(subjectID, subjectName, subjectMonth, grade){
         PopUpWindow.style.display = "flex";
 
         subjectText.textContent = subjectName;
@@ -74,7 +98,7 @@
         gradeInput.focus();
 
         if(grade != 0){
-            gradeValue.value = grade;
+            gradeInput.value = grade;
         } 
     }
 
@@ -84,5 +108,18 @@
         gradeInput.value = 0;
 
         PopUpWindow.style.display = "none";
+    }
+
+    var helpIsVisible = false;
+
+    function ShowHelp(){
+        var helpText = document.getElementById('helpText');
+        var help = document.getElementById('help');
+        
+        helpIsVisible = !helpIsVisible;
+
+        helpText.textContent = helpIsVisible ? "Útmutató elrejtése" : "Útmutató megjelenítése";
+
+        help.classList.toggle("visible", helpIsVisible);
     }
 </script>

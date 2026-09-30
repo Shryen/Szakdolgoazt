@@ -268,6 +268,46 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 
 /* GRADES TABLE STARTS */
 
+.grade-header{
+    margin-bottom: 3rem;
+    width: 80%;
+
+    display: none;
+    gap: 1rem;
+    text-align: justify;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#helpText{
+    font-size: var(--font-size);
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+#helpText:hover{
+    color: var(--button-hover);
+}
+
+
+#help {
+    display: grid;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in, opacity 0.2s ease-in-out;
+}
+
+#help.visible {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.grade-alert{
+    font-style: italic;
+    color: red;
+    margin-bottom: 10px;
+}
+
 .grades-table-wrapper {
     width: 80%;
     overflow-x: auto;

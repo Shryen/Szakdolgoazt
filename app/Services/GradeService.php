@@ -45,6 +45,8 @@ class GradeService {
             $map[$month][$subject][] = $grade;
         }
 
+        // Megnézzük, hogy milyen tantárgyai vannak az adott osztálynak
+        // Mivel a diákon keresztül érjük el az osztályt és az órákat pedig osztályokon keresztül muszáj filterelni
         $subjects = $student->schoolClass->lessons->map(fn ($lesson) => $lesson->subject)->unique('id');
 
         return ['grades' => $map, 'subjects' => $subjects];
