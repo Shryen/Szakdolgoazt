@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\GradeRequest;
 use App\Models\SchoolClass;
 use App\Models\User;
 use App\Models\Subject;
@@ -35,5 +36,14 @@ class GradeController extends Controller
             $this->gradeService->getGradesByMonthAndSubject($student);
                         
         return view('grade.show', compact('student', 'gradesByMonthAndSubject'));
+    }
+
+    public function store(GradeRequest $gradeRequest){
+       $grade = $gradeRequest->validated();
+       $grade['teacher_id'] = $gradeRequest->user()->id;
+
+       $this->gradeService->createGrade($grade);
+
+       return back()->with('success', 'Jegy rögzítve!');
     }
 }

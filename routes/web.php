@@ -41,3 +41,4 @@ Route::get('/hirfolyam/torles/{post}', [PostController::class, 'destroy']);
 Route::get('/jegyek', [GradeController::class, 'index']);
 Route::get('/jegyek/{id}', [GradeController::class, 'showClass']);
 Route::get('/jegyek/{classId}/{studentId}', [GradeController::class, 'show']);
+Route::post('/jegyek/{id}', [GradeController::class, 'store']); // classId nem kell hiszen egyedi azonosítója van a diáknak

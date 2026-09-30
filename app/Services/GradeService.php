@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Grade;
 
 class GradeService {
    private array $months = [
@@ -48,4 +49,17 @@ class GradeService {
 
         return ['grades' => $map, 'subjects' => $subjects];
    }
+
+   public function createGrade(array $data){
+        return Grade::create([
+            'student_id' => $data['student_id'],
+            'teacher_id' => $data['teacher_id'],
+            'subject_id' => $data['subject_id'],
+            'month' => $data['month'],
+            'grade_value' => $data['grade_value'],
+            'description' => $data['description'],
+            'issued_at' => $data['issued_at'] ?? now()->toDateString(),
+        ]);
+   }
+
 }

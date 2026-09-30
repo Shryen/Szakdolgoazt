@@ -10,6 +10,7 @@ class Grade extends Model
         'student_id',
         'teacher_id',
         'subject_id',
+        'month',
         'grade_value',
         'description',
         'issued_at',
