@@ -4,6 +4,8 @@
         $subjects = $gradesByMonthAndSubject['subjects']; // tantárgyak alapján keresünk
         $cellID = 0;
     @endphp
+    <h1>{{$student->first_name}} {{$student->last_name}} jegyei</h1>
+    <br/>
     @if($errors->any())
         @foreach($errors->all() as $error)
             <x-error>{{$error}}</x-error>
