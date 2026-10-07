@@ -4,10 +4,14 @@
         $subjects = $gradesByMonthAndSubject['subjects']; // tantárgyak alapján keresünk
         $cellID = 0;
     @endphp
-    
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            <x-error>{{$error}}</x-error>
+        @endforeach
+    @endif
     <h1>Útmutató</h1>
     <p class="grade-alert">Ne felejtsen el a mentés gombra kattintani!</p>
-    <p onclick="ShowHelp()" id="helpText">Útmutató megjelenítése</p>
+    <p onclick="Handler.ShowHelp()" id="helpText">Útmutató megjelenítése</p>
     <div class="grade-header" id="help">
         <div>
             <h2>Jegy hozzáadása</h2>
@@ -50,76 +54,37 @@
                         <!-- Cellák -->
                         @foreach ($grades as $month => $subjectGrades)
                             <td>
-                                
-                                @forelse ($subjectGrades[$subject->name] ?? [] as $grade)
+                                @foreach ($subjectGrades[$subject->name] ?? [] as $grade)
                                     <span class="grade" 
-                                        onclick="SelectCell( 
+
+                                        onclick="Handler.SelectGrade( 
                                         @js($subject->id), 
                                         @js($subject->name), 
                                         @js($month), 
-                                        @js($grade->grade_value) )" id="{{$cellID++}}">{{ $grade->grade_value }}</span>
-                                @empty
-                                    <span class="no-grade" onclick="SelectCell( @js($subject->id), @js($subject->name), @js($month), @js(0) )" id="{{$cellID++}}">–</span>
-                                @endforelse
+                                        @js($grade->grade_value),
+                                        @js($grade->id),
+                                        @js($grade->description),
+                                        @js($student->id)
+                                        )" 
+
+                                        id="{{$cellID++}}"> {{ $grade->grade_value }} </span>
+                                @endforeach
+                                 <span class="no-grade" 
+                                        onclick="Handler.AddGrade( 
+                                        @js($subject->id), 
+                                        @js($subject->name), 
+                                        @js($month), 
+                                        @js(0), 
+                                        @js($student->id) )" 
+                                        id="{{$cellID++}}"> + </span>
                             </td>
                         @endforeach
-                    </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-    <x-editgrade :id="$student->id"/>
+    <x-choose />
+    <x-editgrade />
+    <script type="module" src="{{ asset('js/GradeHandler.js') }}" >
+    </script>
 </x-layout>
-
-<script>
-    var PopUpWindow = document.getElementById("edit-grade-window");
-    var subjectText = document.getElementById("grade-form-subject");
-    var monthText = document.getElementById("grade-form-month");
-    var gradeInput = document.getElementById("grade-form-value");
-    var monthInput = document.getElementById("grade-input-month");
-    var subjectIDInput = document.getElementById("grade-form-subject_id");
-
-
-    function SelectCell(subjectID, subjectName, subjectMonth, grade){
-        //TODO: Select the cell and decide what to do, for now just add grades
-       AddElementWindow(subjectID, subjectName, subjectMonth, grade);
-    }
-
-    function AddElementWindow(subjectID, subjectName, subjectMonth, grade){
-        PopUpWindow.style.display = "flex";
-
-        subjectText.textContent = subjectName;
-        monthText.textContent = subjectMonth;
-        gradeInput.value = "";
-
-        monthInput.value = subjectMonth.toString();
-        subjectIDInput.value = subjectID;
-
-        gradeInput.focus();
-
-        if(grade != 0){
-            gradeInput.value = grade;
-        } 
-    }
-
-    function CloseWindow(){
-        subjectText.textContent = "";
-        monthText.textContent = "";
-        gradeInput.value = 0;
-
-        PopUpWindow.style.display = "none";
-    }
-
-    var helpIsVisible = false;
-
-    function ShowHelp(){
-        var helpText = document.getElementById('helpText');
-        var help = document.getElementById('help');
-        
-        helpIsVisible = !helpIsVisible;
-
-        helpText.textContent = helpIsVisible ? "Útmutató elrejtése" : "Útmutató megjelenítése";
-
-        help.classList.toggle("visible", helpIsVisible);
-    }
-</script>

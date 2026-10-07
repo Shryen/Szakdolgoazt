@@ -9,12 +9,13 @@
     --cards: #F1F5F9;
     --text: #0F172A;
     --hover: wheat;
+    --text-error: rgb(247, 70, 70);
 
     --button-hover: #3730A3;
     --card-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.5);
     --button-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.5);
 
-    --content-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    --content-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.2);
 
     --title-font-size: 24pt;
     --font-size: 16pt;
@@ -26,6 +27,7 @@
     text-decoration: none;
     box-sizing: border-box;
     list-style: none;
+    font-family: 'Montserrat';
 }
 
 body{
@@ -34,6 +36,13 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.error{
+    font-style: italic;
+    color: var(--text-error);
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 
@@ -304,7 +313,7 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 
 .grade-alert{
     font-style: italic;
-    color: red;
+    color: var(--active);
     margin-bottom: 10px;
 }
 
@@ -313,6 +322,7 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
     overflow-x: auto;
     border-radius: 10px;
     border: 1px solid #ddd;
+    box-shadow: var(--content-shadow);
 }
 
 .grades-table {
@@ -399,7 +409,8 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 .no-grade {
-    color: #bbb;
+    color: var(--main-color);
+    cursor: pointer;
 }
 
 .grade-cell > div, 
@@ -434,6 +445,10 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
     transition: background-color 0.15s ease;
 }
 
+#chooseWindow{
+    display: none;
+}
+
 .add-grade-btn:hover,
 .grade-cell form button:hover {
     background-color: var(--background);
@@ -460,6 +475,21 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 .grade-input-field::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.popup{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup > form{
+    width: 20%;
+    height: 20%;
 }
 
 #edit-grade-window{

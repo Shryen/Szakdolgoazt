@@ -42,3 +42,5 @@ Route::get('/jegyek', [GradeController::class, 'index']);
 Route::get('/jegyek/{id}', [GradeController::class, 'showClass']);
 Route::get('/jegyek/{classId}/{studentId}', [GradeController::class, 'show']);
 Route::post('/jegyek/{id}', [GradeController::class, 'store']); // classId nem kell hiszen egyedi azonosítója van a diáknak
+Route::delete('/jegyek/delete/{id}', [GradeController::class, 'destroy']);
+Route::put('/jegyek/edit/{id}', [GradeController::class, 'update']);

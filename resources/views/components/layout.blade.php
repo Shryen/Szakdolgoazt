@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('app.css') }}">
     <title>E-napló</title>
+    
 </head>
 <body>
     @auth
@@ -23,7 +24,7 @@
             </ul>
         </nav>
     @endauth
-
     {{$slot}}
+
 </body>
 </html>

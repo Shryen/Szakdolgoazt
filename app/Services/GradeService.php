@@ -64,4 +64,20 @@ class GradeService {
         ]);
    }
 
+   public function updateGrade(int $gradeID, array $data){
+        $grade = Grade::findOrFail($gradeID);
+
+        $grade->update([
+            'student_id' => $data['student_id'],
+            'teacher_id' => $data['teacher_id'],
+            'subject_id' => $data['subject_id'],
+            'month' => $data['month'],
+            'grade_value' => $data['grade_value'],
+            'description' => $data['description'],
+            'issued_at' => $data['issued_at'] ?? now()->toDateString(),
+        ]);
+
+        return $grade;  
+   }
+
 }

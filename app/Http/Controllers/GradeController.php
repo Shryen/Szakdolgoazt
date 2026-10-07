@@ -7,6 +7,8 @@ use App\Http\Requests\GradeRequest;
 use App\Models\SchoolClass;
 use App\Models\User;
 use App\Models\Subject;
+use App\Models\Grade;
+
 use App\Services\GradeService;
 
 class GradeController extends Controller
@@ -45,5 +47,18 @@ class GradeController extends Controller
        $this->gradeService->createGrade($grade);
 
        return back()->with('success', 'Jegy rögzítve!');
+    }
+
+    public function update(GradeRequest $gradeRequest, int $gradeID){
+        $grade = $gradeRequest->validated();
+        $grade['teacher_id'] = $gradeRequest->user()->id;
+        $this->gradeService->updateGrade($gradeID, $grade);
+
+        return back()->with('succes', 'Jegy frissítve.');
+    }
+
+    public function destroy($id){
+        Grade::destroy($id);
+        return back()->with('success');
     }
 }
