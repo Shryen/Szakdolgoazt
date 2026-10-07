@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\AbsenceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -44,3 +45,7 @@ Route::get('/jegyek/{classId}/{studentId}', [GradeController::class, 'show']);
 Route::post('/jegyek/{id}', [GradeController::class, 'store']); // classId nem kell hiszen egyedi azonosítója van a diáknak
 Route::delete('/jegyek/delete/{id}', [GradeController::class, 'destroy']);
 Route::put('/jegyek/edit/{id}', [GradeController::class, 'update']);
+
+
+// Órarend és hiányzások
+Route::get('/hianyzas', [AbsenceController::class, 'index']);

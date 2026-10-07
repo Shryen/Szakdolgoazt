@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ClassesSeeder::class,
             SubjectsSeeder::class,
+            AcademicYearSeeder::class
         ]);
 
         User::updateOrCreate(
