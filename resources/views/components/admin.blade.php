@@ -3,7 +3,7 @@
         <a href="/register">Diák felvétele</a>
         <a href="/hirfolyam/letrehozas">Hír létrehozása</a>
         <a href="/jegyek">Jegyek beírása</a>
-        <a href="/hianyzas">Hiányzás rögzítése</a>
+        <a href="/hianyzas">Hiányzások</a>
     </div>
     <div class="admin-content">
         {{$slot}}

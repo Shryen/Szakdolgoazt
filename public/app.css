@@ -15,7 +15,7 @@
     --card-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.5);
     --button-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.5);
 
-    --content-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.2);
+    --content-shadow: 0px 0px 15px 0px rgba(0, 0, 0, .8);
 
     --title-font-size: 24pt;
     --font-size: 16pt;
@@ -37,6 +37,7 @@ body{
     align-items: center;
     height: 100vh;
 }
+
 
 .error{
     font-style: italic;
@@ -128,7 +129,7 @@ nav{
     background-color: var(--main-color);
     border-bottom: 1px solid black;
 
-    width: 100%;
+    width: 100vw;
     padding: 1rem;
     
     text-decoration: none;
@@ -513,28 +514,29 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 
 .admin-panel{
     background-color: var(--background);
-    outline: 1px solid var(--main-color);
+    outline: 2px solid var(--main-color);
     border-radius: 10px;
     box-shadow: var(--content-shadow);
 
     min-height: 80%;
+    min-width: 80%;
+    
+    display: grid;
+    grid-template-rows: auto 1fr;
 }
 
 .admin-content{
-    padding: 1rem 1rem 1rem 1rem;
-
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
 }
 
 .admin-nav{
     display: flex;
-    gap: 15px;
     justify-content: space-evenly;
     align-items: center;
     border-bottom: 1px solid var(--main-color);
+    background-color: var(--main-color);
 
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -544,16 +546,15 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
     margin: 10px;
     padding: 7px;
     font-size: var(--font-size);
-    color: var(--text);
+    color: var(--background);
+    border: 1px solid var(--main-color);
 
     border-radius: 10px;
-    outline: 1px solid var(--main-color);
-    background-color: var(--cards);
     transition: .3s all ease-in-out;
 }
 
 .admin-nav > a:hover, .admin-nav > a:focus{
-    box-shadow: var(--button-shadow);
+    border: 1px solid var(--active);
 }
 
 .admin-choose{
@@ -569,9 +570,65 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 
 /* ADMIN PANEL ENDS */
 
-[x-cloak] { 
-    display: none !important; 
+/* ABSENCES TABLE STARTS */
+
+.absence-table{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3rem;
+    min-width: 60%;
 }
+
+.absence-table-time{
+    grid-column: span 5;
+    text-align: center;
+    width: 100%;
+    font-size: 24pt;
+}
+
+.absence-table-lessons{
+    padding: 1rem;
+    margin: 0 auto;
+    border: 2px solid var(--main-color);
+    font-size: var(--font-size);
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+}
+
+.absence-table-lessons:hover{
+    transform: scale(1.1);
+    box-shadow: var(--card-shadow);
+    border: 2px solid var(--active)
+}
+
+.absence-table-lessons > a{
+    color: var(--text)
+}
+
+/* ABSENCES TABLE ENDS */
+
+
+.student-list{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-size);
+    justify-content: center;
+    align-items: center;
+}
+
+.student-list > a{
+    padding-block: 5px;
+    color: var(--text);
+    transition: all .2s ease-in-out;
+}
+
+.student-list > a:hover{
+    transform: scale(1.1);
+    color: var(--active);
+}
+
 
 /*
     keyframes (animations)

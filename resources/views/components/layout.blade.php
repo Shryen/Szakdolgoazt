@@ -24,7 +24,8 @@
             </ul>
         </nav>
     @endauth
-    {{$slot}}
+    
+    {{ $slot }}
 
 </body>
 </html>

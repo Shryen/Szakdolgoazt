@@ -19,6 +19,8 @@ class Lesson extends Model
     {
         return [
             'day_of_week' => 'integer',
+            'start_time' => 'datetime:H:i',
+            'end_time' => 'datetime:H:i'
         ];
     }
 

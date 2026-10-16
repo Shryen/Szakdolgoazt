@@ -14,6 +14,7 @@ class LessonsSeeder extends Seeder
 {
     public function run(): void
     {
+        $i = 0;
         $subjects = Subject::query()->get();
 
         if ($subjects->count() < 6) {
@@ -42,6 +43,12 @@ class LessonsSeeder extends Seeder
                             'end_time' => $startTime->addMinutes(45)->format('H:i:s'),
                         ],
                     );
+
+                    $i++;
+                    if($i === 5){
+                        return;
+                    }
+                    
                 }
             }
         }

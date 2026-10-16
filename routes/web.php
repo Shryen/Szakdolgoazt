@@ -49,3 +49,6 @@ Route::put('/jegyek/edit/{id}', [GradeController::class, 'update']);
 
 // Órarend és hiányzások
 Route::get('/hianyzas', [AbsenceController::class, 'index']);
+Route::get('/hianyzas/create', [AbsenceController::class, 'create']);
+Route::get('/hianyzas/{lesson}', [AbsenceController::class, 'show']);
+Route::post('/hianyzas/{lesson}', [AbsenceController::class, 'store']);
