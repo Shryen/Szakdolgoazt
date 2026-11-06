@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
 
     // Diák és tanár is
     Route::get('/hirfolyam', [PostController::class, 'index']);
+    Route::get('/hirfolyam/letrehozas', [PostController::class, 'create']);
+    Route::get('/hirfolyam/{post}', [PostController::class, 'show']);
     Route::get('/jegyek', [GradeController::class, 'index']);
     Route::get('/jegyek/{classId}/{studentId}', [GradeController::class, 'show']);
     Route::get('/hianyzas', [AbsenceController::class, 'index']);

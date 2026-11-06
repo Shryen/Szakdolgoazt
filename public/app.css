@@ -179,115 +179,198 @@ nav > ul > li > a:hover, nav > ul > li > a:hover:focus{
 
 
 /* POSTS START */
+form:has(#search){
+    box-shadow: none;
+    background-color: transparent;
+    flex-direction: row;
+    min-height: 0;
+    min-width: 0;
+    width: 80%;
+    max-width: 600px;
+    margin-block: 1rem;
+    padding: 10px 16px;
+    gap: 10px;
+}
+
+form:has(#search) #search{
+    flex: 1;
+    width: auto;
+    margin: 0;
+}
+
+form:has(#search) button{
+    min-width: 0;
+    padding: 10px 20px;
+    font-size: 12pt;
+}
+
 
 .posts{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    max-width: 80%;
-
-    place-items: center;
+    align-content: start;
+    gap: 1.25rem;
+    width: 80%;
+    min-height: 0;
+    padding: 1rem;
+    overflow-y: auto;
 }
-
 .post-card{
-    max-width: 300px;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 14px 16px;
+    border: 1px solid var(--cards);
+    border-top: 4px solid var(--main-color);
+    border-radius: 8px;
     box-shadow: var(--card-shadow);
     background-color: var(--background);
+    color: var(--text);
+    transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.post-card:hover{
+    transform: translateY(-3px);
+    box-shadow: var(--content-shadow);
 }
 
 .post-card > p{
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    display: -webkit-box;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
     overflow-wrap: anywhere;
 }
 
-.post-card:nth-child(1) {
+.post-card:nth-child(1){
     grid-column: span 3;
-    width: 80%;
+    border-top-color: var(--active);
 }
 
 .post-card:nth-child(2){
     grid-column: span 2;
-    width: 40%;
 }
 
 .feed-post-author{
     font-size: 12pt;
     font-style: italic;
+    color: var(--main-dark);
+    margin-bottom: 4px;
 }
+
 
 .feed-post-title{
     font-size: 18pt;
     font-weight: bold;
-    border-bottom: 1px solid var(--main-color);
-
     color: var(--main-color);
+    border-bottom: 1px solid var(--cards);
+    padding-bottom: 6px;
     margin-bottom: 10px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-card:nth-child(1) .feed-post-title{
+    font-size: 22pt;
+}
+
+.feed-post-title a{
+    color: inherit;
+    transition: color .2s ease-in-out;
+}
+
+.feed-post-title a:hover{
+    color: var(--main-dark);
 }
 
 .feed-post-content{
-    padding-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-card:nth-child(1) .feed-post-content{
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
 }
 
 /* A post amit megnyitott a felhasználó, tehát nem ami a főoldalon van kilistázva */
 .post{
     display: flex;
-    justify-content: center;
-    box-shadow: var(--content-shadow);
+    width: 80%;
+    height: 70%;
+    background-color: var(--background);
+    border-radius: 10px;
     outline: 2px solid var(--main-color);
-    border-radius: 3px;
-    height: 50%;
+    box-shadow: var(--content-shadow);
+    overflow: hidden;
 }
 
 .post-sidebar{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-width: 20%;
+    width: 25%;
+    min-width: 220px;
+    padding: 1.25rem;
+    background-color: var(--cards);
     border-right: 1px solid var(--main-color);
-    padding: 1rem;
-    background-color: var(--background);
+    overflow-y: auto;
 }
 
 .post-sidebar > div > h1{
-    color: var(--main-color);
-    padding-bottom: 2px;
-}
-
-.post-sidebar > div > a{ /* Vissza gomb */
-    display: block;
-    text-align: center;
-    font-size: 14pt;
-    background-color: var(--main-color);
-    color: var(--background);
-    border-radius: 5px;
-    width: fit-content;
-    text-align: center;
-    padding: 10px;
-transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-.post-sidebar > div > a:hover, .post-sidebar>div>a:focus{
-    background-color: var(--button-hover);  
-    transform: scale(1.2);
+    color: var(--main-dark);
+    padding-bottom: 4px;
+    overflow-wrap: anywhere;
 }
 
 .post-date{
     font-style: italic;
     font-size: 10pt;
+    opacity: .75;
+}
+
+/* Gombok: Vissza, Szerkesztés, Törlés */
+.post-sidebar > div:last-child{
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+
+.post-sidebar > div > a{
+    display: block;
+    width: fit-content;
+    padding: 10px 16px;
+    font-size: 14pt;
+    text-align: center;
+    color: var(--background);
+    background-color: var(--main-color);
+    border-radius: 5px;
+    box-shadow: var(--button-shadow);
+    transition: transform .2s ease-in-out, background-color .2s ease-in-out;
+}
+
+.post-sidebar > div > a:hover,
+.post-sidebar > div > a:focus{
+    background-color: var(--button-hover);
+    transform: scale(1.05);
+}
+
+.post-sidebar > div > a[href*="/torles/"]{
+    background-color: var(--text-error);
+}
+
+.post-sidebar > div > a[href*="/torles/"]:hover,
+.post-sidebar > div > a[href*="/torles/"]:focus{
+    background-color: color-mix(in srgb, var(--text-error) 80%, black);
 }
 
 .post-content{
-    padding: 1rem;
+    flex: 1;
+    padding: 1.5rem;
+    line-height: 1.6;
     white-space: pre-line;
+    overflow-wrap: anywhere;
+    overflow-y: auto;
 }
 
 /* POSTS END */

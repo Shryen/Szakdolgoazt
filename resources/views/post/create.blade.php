@@ -9,3 +9,12 @@
         </x-form>
     </x-admin>
 </x-layout>
+
+<style>
+    document.getElementById('content').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.isComposing) {
+            e.preventDefault();
+            this.setRangeText('<br/>\n', this.selectionStart, this.selectionEnd, 'end');
+        }
+    });
+</style>
