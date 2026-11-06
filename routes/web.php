@@ -25,7 +25,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/hirfolyam', [PostController::class, 'index']);
     Route::get('/hirfolyam/letrehozas', [PostController::class, 'create']);
     Route::get('/hirfolyam/{post}', [PostController::class, 'show']);
-    Route::get('/jegyek', [GradeController::class, 'index']);
     Route::get('/jegyek/{classId}/{studentId}', [GradeController::class, 'show']);
     Route::get('/hianyzas', [AbsenceController::class, 'index']);
     Route::get('/hianyzasok', [AbsenceController::class, 'showAllAbsences'])->name('hianyzasok');
@@ -37,6 +36,7 @@ Route::middleware('auth')->group(function () {
 
     // Csak tanár
     Route::middleware('role:teacher,admin')->group(function () {
+        Route::get('/jegyek', [GradeController::class, 'index']);
         // Hírfolyam kezelése
         Route::get('/hirfolyam/letrehozas', [PostController::class, 'create']);
         Route::post('/hirfolyam', [PostController::class, 'store']);

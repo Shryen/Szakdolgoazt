@@ -12,16 +12,16 @@
     @auth
         <nav>
             <ul>
-                <li><a href="/kezdolap">Kezdőlap</a></li>
-                <li><a href="/hirfolyam">Hírfolyam</a></li>
+                <li><x-navlink href="/kezdolap">Kezdőlap</x-navlink></li>
+                <li><x-navlink href="/hirfolyam" match="hirfolyam*">Hírfolyam</x-navlink></li>
             </ul>
             <ul>
-                <li><a href="">{{auth()->user()->first_name}}</a></li>
-                <li><a href="/uzenetek">Üzenetek</a></li>
-                <li><a href="/logout">Kijelentkezés</a></li>
+                <li><x-navlink href="">{{ auth()->user()->first_name }}</x-navlink></li>
+                <li><x-navlink href="/uzenetek" match="uzenet*">Üzenetek</x-navlink></li>
+                <li><x-navlink href="/logout">Kijelentkezés</x-navlink></li>
                 @if(auth()->user()->username === 'Admin')
-                    <li><a href="/admin">Admin panel</a></li>
-                @endif 
+                    <li><x-navlink href="/admin" match="admin*">Admin panel</x-navlink></li>
+                @endif
             </ul>
         </nav>
     @endauth

@@ -1,9 +1,9 @@
 <div class="admin-panel">
     <div class="admin-nav">
-        <a href="/register">Diák felvétele</a>
-        <a href="/hirfolyam/letrehozas">Hír létrehozása</a>
-        <a href="/jegyek">Jegyek beírása</a>
-        <a href="/hianyzas">Hiányzások</a>
+        <x-navlink href="/register">Diák felvétele</x-navlink>
+        <x-navlink href="/hirfolyam/letrehozas">Hír létrehozása</x-navlink>
+        <x-navlink href="/jegyek" match="jegyek*">Jegyek beírása</x-navlink>
+        <x-navlink href="/hianyzas" match="hianyzas*">Hiányzások</x-navlink>
     </div>
     <div class="admin-content">
         {{$slot}}

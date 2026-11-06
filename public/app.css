@@ -32,6 +32,7 @@
 
 }
 
+
 body{
     display: flex;
     flex-direction: column;
@@ -62,50 +63,63 @@ body{
 
 /* FORM START */
 
+/* FORM START */
+
 form{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-
-    border-radius: 10px;
-    padding: 10px;
-    
-    box-shadow: var(--card-shadow);
-
     gap: 1rem;
 
+    padding: 1.75rem;
     min-height: 40%;
-    min-width: 20%;
+    min-width: 30%;
 
-    background-color: var(--cards);
+    background-color: var(--background);
+    border: 1px solid var(--cards);
+    border-top: 4px solid var(--main-color);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
 }
 
 form > h1{
     font-size: var(--title-font-size);
+    text-align: center;
+    color: var(--main-color);
 }
 
-input{
-    width: 80%;
-    padding: 10px;
-    font-size: var(--font-size);
-    border-radius: 5px;
-    border: none;
-    outline: 1px solid var(--main-color);
-    margin: 10px;
+form > label{
+    font-size: 11pt;
+    font-weight: 600;
+}
+
+/* A :where() miatt a specificitás alacsony marad, így a .chat-footer input, .grade-input-field stb. szabályaid továbbra is felülírják */
+input:where(:not([type="checkbox"], [type="radio"], [type="hidden"])),
+form > textarea{
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 12pt;
+    color: var(--text);
+    background-color: white;
+    border: 1px solid var(--cards);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color .2s ease;
 }
 
 form > textarea{
-    width: 80%;
-    padding: 10px;
-    font-size: var(--font-size);
-    border-radius: 5px;
-    border: none;
-    outline: 1px solid var(--main-color);
+    min-height: 200px;
+    resize: vertical;
 }
 
-input:focus, form > textarea:focus{
+:where(input, textarea):focus{
+    border-color: var(--active);
     outline: 2px solid var(--active);
+}
+
+::placeholder{
+    color: color-mix(in srgb, var(--text) 45%, transparent);
 }
 
 /* FORM END */
@@ -168,6 +182,13 @@ body > nav > ul > li > a{
     color: var(--background);
     transition: .2s all ease-in-out;
     padding: 5px;
+}
+
+body > nav > ul > li > a.active{
+    color: var(--background);
+    background-color: var(--main-dark);
+    border-radius: 6px;
+    font-weight: 600;
 }
 
 body > nav > ul > li > a:hover, nav > ul > li > a:hover:focus{
@@ -668,6 +689,7 @@ form:has(#search) button{
 
 .admin-content{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -694,18 +716,68 @@ form:has(#search) button{
     transition: .3s all ease-in-out;
 }
 
+.admin-nav > a.active{
+    color: var(--main-color);
+    background-color: var(--background);
+    border-color: var(--background);
+    font-weight: 600;
+}
+
 .admin-nav > a:hover, .admin-nav > a:focus{
     border: 1px solid var(--background);
 }
 
 .admin-choose{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, auto);
+    justify-content: center;
+    gap: 1.5rem 2.5rem;
+    margin-top: 1.5rem;
 }
 
 .admin-column{
     display: flex;
-    border: 1px solid black;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.admin-column > a,
+.student-choose > a{
+    min-width: 110px;
+    padding: 12px 24px;
+    text-align: center;
+    font-size: var(--font-size);
+    font-weight: 600;
+    color: var(--main-color);
+    background-color: var(--background);
+    border: 1px solid var(--cards);
+    border-radius: 8px;
+    box-shadow: var(--button-shadow);
+    transition: transform .2s ease-in-out, background-color .2s ease-in-out, color .2s ease-in-out;
+}
+
+.admin-column > a:hover,
+.admin-column > a:focus,
+.student-choose > a:hover,
+.student-choose > a:focus{
+    color: var(--background);
+    background-color: var(--main-color);
+    transform: translateY(-2px);
+}
+
+.student-choose{
+    columns: 3;
+    column-gap: 1.5rem;
+    margin-top: 1.5rem;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+.student-choose > a{
+    display: block;
+    margin-bottom: .75rem;
+    break-inside: avoid;
 }
 
 
