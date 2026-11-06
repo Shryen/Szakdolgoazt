@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('academic_weeks');
+        Schema::dropIfExists('academic_year');
     }
 };
