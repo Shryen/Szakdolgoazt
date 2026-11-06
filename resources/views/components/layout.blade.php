@@ -17,6 +17,7 @@
             </ul>
             <ul>
                 <li><a href="">{{auth()->user()->first_name}}</a></li>
+                <li><a href="/uzenetek">Üzenetek</a></li>
                 <li><a href="/logout">Kijelentkezés</a></li>
                 @if(auth()->user()->username === 'Admin')
                     <li><a href="/admin">Admin panel</a></li>
@@ -25,7 +26,7 @@
         </nav>
     @endauth
     
-    {{ $slot }}
+    <div class="content">{{ $slot }}</div>
 
 </body>
 </html>

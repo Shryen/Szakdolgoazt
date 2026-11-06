@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\AbsenceController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -56,3 +57,9 @@ Route::get('/hianyzasok', [AbsenceController::class, 'showAllAbsences'])->name('
 Route::post('/hianyzas/torles/{id}', [AbsenceController::class, 'destroy']);
 Route::get('/hianyzas/szerkeszt/{absence}', [AbsenceController::class, 'edit']);
 Route::put('/hianyzas/szerkeszt/{absence}', [AbsenceController::class, 'update']);
+
+// Üzenetek
+Route::get('/uzenetek', [MessageController::class, 'index']);
+Route::get('/uzenet/uj', [MessageController::class, 'create']);
+Route::post('/uzenet', [MessageController::class, 'store']);
+Route::get('/uzenet/{id}', [MessageController::class, 'show']); 
