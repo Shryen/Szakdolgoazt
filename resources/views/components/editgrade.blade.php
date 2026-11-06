@@ -1,5 +1,5 @@
-@props(["method" => ""])
-
+@props(["method" => "", "editedby" => ""])
+ 
 <div id="edit-grade-window" class="popup">
     <x-form action="" :errorNeeded="false" id="grade-form">
         <h2 id="grade-form-subject"></h2>
@@ -12,6 +12,9 @@
         <input type="hidden" name="student_id" id="grade-form-student_id">
         <input type="hidden" name="subject_id" id="grade-form-subject_id">
         <input type="hidden" name="grade_id" id="grade-form-grade_id">
+
+        <!-- TODO: Szerkesztés esetén mentés -->
+        <p>Szerkesztve: {{$editedby}}</p>
 
         <button id="grade-form-save">Jegy rögzítése</button>
         <button id="grade-form-cancel" onclick="Handler.CloseWindow()" type="button">Mégsem</button>

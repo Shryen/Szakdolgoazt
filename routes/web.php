@@ -52,3 +52,7 @@ Route::get('/hianyzas', [AbsenceController::class, 'index']);
 Route::get('/hianyzas/create', [AbsenceController::class, 'create']);
 Route::get('/hianyzas/{lesson}', [AbsenceController::class, 'show']);
 Route::post('/hianyzas/{lesson}', [AbsenceController::class, 'store']);
+Route::get('/hianyzasok', [AbsenceController::class, 'showAllAbsences'])->name('hianyzasok');
+Route::post('/hianyzas/torles/{id}', [AbsenceController::class, 'destroy']);
+Route::get('/hianyzas/szerkeszt/{absence}', [AbsenceController::class, 'edit']);
+Route::put('/hianyzas/szerkeszt/{absence}', [AbsenceController::class, 'update']);

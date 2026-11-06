@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AcademicYear;
 use App\Models\Lesson;
+use App\Models\Absence;
 use App\Services\AbsenceService;
 use App\Http\Requests\AbsenceRequest;
 
@@ -17,6 +18,11 @@ class AbsenceController extends Controller
 
     public function index(){
         return view('absence.index');
+    }
+
+    public function showAllAbsences(){
+        $absences = Absence::all();
+        return view('absence.absences', compact('absences'));
     }
 
     public function create(){
@@ -43,6 +49,26 @@ class AbsenceController extends Controller
         $request = $absenceRequest->validated();
         $request['teacher_id'] = $this->teacherId;
         $absence = $this->absenceService->CreateAbsence($request);
+        // TODO: Kis ablak létrehozása üzeneteknek.
         return back()->with('success', 'Hiányzás rögzítve.');
+    }
+
+    public function edit(Absence $absence){
+        return view('absence.edit', compact('absence'));
+    }
+
+    public function update(Request $request, Absence $absence){
+        $validate = $request->validate([
+            'date' => 'required',
+            'is_justified' => 'required'
+        ]);
+        $absence->update($validate);
+        
+        return redirect()->route('hianyzasok');
+    }
+
+    public function destroy($id){
+        Absence::destroy($id);
+        return back()->with('success');
     }
 }

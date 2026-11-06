@@ -85,8 +85,11 @@
             </tbody>
         </table>
     </div>
+
     <x-choose />
-    <x-editgrade />
+    <x-editgrade editedby="{{$teacher->first_name}} {{$teacher->last_name}}"/>
+
     <script type="module" src="{{ asset('js/GradeHandler.js') }}" >
     </script>
+    
 </x-layout>

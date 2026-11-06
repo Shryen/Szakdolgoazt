@@ -34,7 +34,7 @@ class UserService {
 
     public function generateUsername(string $firstName, string $lastName){
         // Ékezetek eltávolítása és kisbetű
-        $cleanFirst = Str::slug($firstName, ''); 
+        $cleanFirst = Str::slug($firstName, '');
         $cleanLast = Str::slug($lastName, '');
 
         $baseUsername = substr($cleanFirst, 0, 2) . $cleanLast . rand(10, 99); //első kettő betű családnév, teljes keresztnév + 2 random szám
@@ -48,6 +48,7 @@ class UserService {
     }
 
     public function generateOMID(){
+        // Random töltünk fel azonosítót, teszt jelleggel az adatbázisba
          do {
             $omId = '71' . random_int(1000000, 9999999);
         } while (User::where('om_id', $omId)->exists());

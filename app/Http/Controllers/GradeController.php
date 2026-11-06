@@ -34,10 +34,12 @@ class GradeController extends Controller
         $student = User::where('school_class_id', $classId)
                         ->where('id', $userId)->firstOrFail();
 
+        $teacher = auth()->user();
+
         $gradesByMonthAndSubject =
             $this->gradeService->getGradesByMonthAndSubject($student);
                         
-        return view('grade.show', compact('student', 'gradesByMonthAndSubject'));
+        return view('grade.show', compact('student', 'gradesByMonthAndSubject', 'teacher'));
     }
 
     public function store(GradeRequest $gradeRequest){

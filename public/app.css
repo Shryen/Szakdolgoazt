@@ -606,6 +606,43 @@ transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
     color: var(--text)
 }
 
+.absence-content{
+    display: flex column;
+    font-size: var(--font-size);
+    text-align: center;
+    padding: 1rem;
+}
+
+.absence-list{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.absence-header{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-bottom: 1px solid var(--main-color);
+    padding-bottom: 1rem;
+}
+
+form.hidden-form {
+    all: revert;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form.hidden-form > button{
+    all: revert;
+    outline: none;
+    background: transparent;
+    border: none;
+}
+
+
+
 /* ABSENCES TABLE ENDS */
 
 

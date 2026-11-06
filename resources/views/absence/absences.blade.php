@@ -7,6 +7,7 @@
                     <strong>Diák neve</strong>
                     <strong>Óra kezdete</strong>
                     <strong>Óra vége</strong>
+                    <strong>Igazolás</strong>
                     <strong>Törlés/Szerkesztés</strong>
             </div>
     
@@ -16,6 +17,7 @@
                     <p>{{$absence->student->first_name}} {{$absence->student->last_name}}</p>
                     <p>{{$absence->lesson->start_time->format("Y.m.d H:i")}}</p>
                     <p>{{$absence->lesson->end_time->format("Y.m.d H:i")}}</p>
+                    <p>{{$absence->is_justified ? "Igazolt" : "Igazolatlan"}}</p>
 
                 <div>
                     <x-form action="/hianyzas/torles/{{$absence->id}}" method="POST" class="hidden-form">
