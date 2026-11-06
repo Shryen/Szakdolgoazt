@@ -137,7 +137,7 @@ button:hover{
 
 /* NAV START */
 
-nav{
+body > nav{
     position: fixed;
     top:0;
     
@@ -155,7 +155,7 @@ nav{
     justify-content: space-around;
 }
 
-nav > ul{
+body > nav > ul{
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -163,14 +163,14 @@ nav > ul{
 }
 
 
-nav > ul > li > a{
+body > nav > ul > li > a{
     display: inline-block;
     color: var(--background);
     transition: .2s all ease-in-out;
     padding: 5px;
 }
 
-nav > ul > li > a:hover, nav > ul > li > a:hover:focus{
+body > nav > ul > li > a:hover, nav > ul > li > a:hover:focus{
     color: var(--hover);
     animation: jump 0.4s ease-in-out;
 }
@@ -375,6 +375,43 @@ form:has(#search) button{
 
 /* POSTS END */
 
+/* PAGINATION FOR POSTS */
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-block: 1rem;
+}
+
+.pagination li > a,
+.pagination li > span{
+    display: inline-block;
+    min-width: 38px;
+    padding: 8px 12px;
+    text-align: center;
+    color: var(--main-color);
+    background-color: var(--background);
+    border: 1px solid var(--cards);
+    border-radius: 6px;
+    transition: .2s all ease;
+}
+
+.pagination li > a:hover{
+    background-color: var(--cards);
+}
+
+.pagination li.active > span{
+    color: var(--background);
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.pagination li.disabled > span{
+    opacity: .5;
+}
+
+/* PAGINATION FOR POSTS END */
 
 /* GRADES TABLE STARTS */
 
@@ -1065,3 +1102,5 @@ form.hidden-form > button{
         -webkit-transform: scale(1.2);
     }
 }
+
+

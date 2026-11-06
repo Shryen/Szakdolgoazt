@@ -15,6 +15,8 @@
             </div>
         </div>
         <div class="post-content">
+            <h1>{{$post->title}}</h1>
+            <hr/>
             {{$post->content}}
         </div>
     </div>

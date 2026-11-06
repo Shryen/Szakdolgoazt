@@ -18,7 +18,7 @@ class PostController extends Controller
         ->when($q !== '', fn ($query) =>
             $query->whereAny(['title', 'content'], 'like', "%{$q}%")
         )
-        ->latest()->paginate(10); // eager loading, n+1 problémára megoldás így nem történik + egy query amikor posztokat kérdezünk le
+        ->latest()->paginate(9); // eager loading, n+1 problémára megoldás így nem történik + egy query amikor posztokat kérdezünk le
         return view('post.index', compact('posts'));
     }
 
