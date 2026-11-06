@@ -31,6 +31,11 @@ class GradeController extends Controller
     }
 
     public function show(int $classId, int $userId){
+        // Tiltás azellen hogy diák, másik diák jegyeit nézhesse meg
+        if (auth()->user()->role === 'student' && $studentId != auth()->id()) {
+            abort(403);
+        }
+
         $student = User::where('school_class_id', $classId)
                         ->where('id', $userId)->firstOrFail();
 

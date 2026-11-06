@@ -9,57 +9,56 @@ use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/kezdolap', function(){
-    $user = Auth::user();
-    return view('dashboard', compact('user'));
-});
-
-// Auth
-Route::get('/register', function(){
-    return view('admin.register');
-});
-Route::post('/register', [UserController::class, 'store']);
+// Publikus
+Route::get('/', fn () => view('welcome'));
 Route::post('/login', [UserController::class, 'login']);
-Route::get('/logout', [UserController::class, 'logout']);
 
-// Admin
-Route::get('/admin', [AdminController::class, 'index']);
+Route::middleware('auth')->group(function () {
 
-// Post
-Route::get('/hirfolyam', [PostController::class, 'index']);
-Route::get('/hirfolyam/letrehozas', [PostController::class, 'create']);
-Route::post('/hirfolyam', [PostController::class,'store']);
-Route::get('/hirfolyam/{post}', [PostController::class, 'show']); //{post} paraméterként mert nem id alapján, hanem model alapján keresünk
-Route::get('/hirfolyam/szerkesztes/{post}', [PostController::class, 'edit']);
-Route::put('/hirfolyam/szerkeszt/{post}', [PostController::class, 'update']);
-Route::get('/hirfolyam/torles/{post}', [PostController::class, 'destroy']);
+    Route::get('/kezdolap', function () {
+        $user = Auth::user();
+        return view('dashboard', compact('user'));
+    });
+    Route::get('/logout', [UserController::class, 'logout']);
 
+    // Diák és tanár is
+    Route::get('/hirfolyam', [PostController::class, 'index']);
+    Route::get('/jegyek', [GradeController::class, 'index']);
+    Route::get('/jegyek/{classId}/{studentId}', [GradeController::class, 'show']);
+    Route::get('/hianyzas', [AbsenceController::class, 'index']);
+    Route::get('/hianyzasok', [AbsenceController::class, 'showAllAbsences'])->name('hianyzasok');
 
-// Grades
-Route::get('/jegyek', [GradeController::class, 'index']);
-Route::get('/jegyek/{id}', [GradeController::class, 'showClass']);
-Route::get('/jegyek/{classId}/{studentId}', [GradeController::class, 'show']);
-Route::post('/jegyek/{id}', [GradeController::class, 'store']); // classId nem kell hiszen egyedi azonosítója van a diáknak
-Route::delete('/jegyek/delete/{id}', [GradeController::class, 'destroy']);
-Route::put('/jegyek/edit/{id}', [GradeController::class, 'update']);
+    Route::get('/uzenetek', [MessageController::class, 'index']);
+    Route::get('/uzenet/uj', [MessageController::class, 'create']);
+    Route::post('/uzenet', [MessageController::class, 'store']);
+    Route::get('/uzenet/{id}', [MessageController::class, 'show']);
 
+    // Csak tanár
+    Route::middleware('role:teacher,admin')->group(function () {
+        // Hírfolyam kezelése
+        Route::get('/hirfolyam/letrehozas', [PostController::class, 'create']);
+        Route::post('/hirfolyam', [PostController::class, 'store']);
+        Route::get('/hirfolyam/szerkesztes/{post}', [PostController::class, 'edit']);
+        Route::put('/hirfolyam/szerkeszt/{post}', [PostController::class, 'update']);
+        Route::get('/hirfolyam/torles/{post}', [PostController::class, 'destroy']);
 
-// Órarend és hiányzások
-Route::get('/hianyzas', [AbsenceController::class, 'index']);
-Route::get('/hianyzas/create', [AbsenceController::class, 'create']);
-Route::get('/hianyzas/{lesson}', [AbsenceController::class, 'show']);
-Route::post('/hianyzas/{lesson}', [AbsenceController::class, 'store']);
-Route::get('/hianyzasok', [AbsenceController::class, 'showAllAbsences'])->name('hianyzasok');
-Route::post('/hianyzas/torles/{id}', [AbsenceController::class, 'destroy']);
-Route::get('/hianyzas/szerkeszt/{absence}', [AbsenceController::class, 'edit']);
-Route::put('/hianyzas/szerkeszt/{absence}', [AbsenceController::class, 'update']);
+        // Jegyek kezelése
+        Route::get('/jegyek/{id}', [GradeController::class, 'showClass']);
+        Route::post('/jegyek/{id}', [GradeController::class, 'store']);
+        Route::delete('/jegyek/delete/{id}', [GradeController::class, 'destroy']);
+        Route::put('/jegyek/edit/{id}', [GradeController::class, 'update']);
 
-// Üzenetek
-Route::get('/uzenetek', [MessageController::class, 'index']);
-Route::get('/uzenet/uj', [MessageController::class, 'create']);
-Route::post('/uzenet', [MessageController::class, 'store']);
-Route::get('/uzenet/{id}', [MessageController::class, 'show']); 
+        // Hiányzások kezelése
+        Route::get('/hianyzas/create', [AbsenceController::class, 'create']);
+        Route::get('/hianyzas/{lesson}', [AbsenceController::class, 'show']);
+        Route::post('/hianyzas/{lesson}', [AbsenceController::class, 'store']);
+        Route::post('/hianyzas/torles/{id}', [AbsenceController::class, 'destroy']);
+        Route::get('/hianyzas/szerkeszt/{absence}', [AbsenceController::class, 'edit']);
+        Route::put('/hianyzas/szerkeszt/{absence}', [AbsenceController::class, 'update']);
+    });
+
+    // Admin
+    Route::get('/admin', [AdminController::class, 'index'])->middleware('role:admin');
+    Route::get('/register', fn () => view('admin.register'))->middleware('role:admin');
+    Route::post('/register', [UserController::class, 'store'])->middleware('role:admin');
+});
