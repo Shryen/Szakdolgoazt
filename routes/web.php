@@ -7,10 +7,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Publikus
-Route::get('/', fn () => view('welcome'));
+Route::get('/', fn () => view('welcome'))->name('login');
 Route::post('/login', [UserController::class, 'login']);
 
 Route::middleware('auth')->group(function () {
@@ -33,6 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/uzenet/uj', [MessageController::class, 'create']);
     Route::post('/uzenet', [MessageController::class, 'store']);
     Route::get('/uzenet/{id}', [MessageController::class, 'show']);
+
+    Route::get('/profil', [ProfileController::class, 'index']);
+    Route::get('/profil/hianyzas', [ProfileController::class, 'absences']);
+    Route::get('/profil/orarend', [ProfileController::class, 'timetable']);
+
+    
 
     // Csak tanár
     Route::middleware('role:teacher,admin')->group(function () {

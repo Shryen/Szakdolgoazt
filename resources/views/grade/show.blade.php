@@ -57,6 +57,7 @@
                         @foreach ($grades as $month => $subjectGrades)
                             <td>
                                 @foreach ($subjectGrades[$subject->name] ?? [] as $grade)
+                                @if(in_array(auth()->user()->role, ['teacher', 'admin']))
                                     <span class="grade" 
 
                                         onclick="Handler.SelectGrade( 
@@ -70,7 +71,12 @@
                                         )" 
 
                                         id="{{$cellID++}}"> {{ $grade->grade_value }} </span>
+                                @else
+                                    <span class="grade">{{$grade->grade_value}}</span>
+                                @endif
                                 @endforeach
+
+                                @if(in_array(auth()->user()->role->value, ['teacher', 'admin']))
                                  <span class="no-grade" 
                                         onclick="Handler.AddGrade( 
                                         @js($subject->id), 
@@ -79,6 +85,8 @@
                                         @js(0), 
                                         @js($student->id) )" 
                                         id="{{$cellID++}}"> + </span>
+                                @endif
+
                             </td>
                         @endforeach
                 @endforeach

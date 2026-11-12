@@ -41,12 +41,10 @@ class GradeController extends Controller
 
         $teacher = auth()->user();
 
-        $editedBy = Grade::whereNotNull('edited_by')->get()->keyBy('id');
-
         $gradesByMonthAndSubject =
             $this->gradeService->getGradesByMonthAndSubject($student);
                         
-        return view('grade.show', compact('student', 'gradesByMonthAndSubject', 'teacher', 'editedBy'));
+        return view('grade.show', compact('student', 'gradesByMonthAndSubject', 'teacher'));
     }
 
     public function store(GradeRequest $gradeRequest){

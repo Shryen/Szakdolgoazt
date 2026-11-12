@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('om_id', 20)->unique();
             $table->string('username')->unique();
-            $table->enum('role', ['admin', 'teacher', 'student']);
+            $table->enum('role', ['admin', 'teacher', 'student'])->default('student');
             $table->foreignId('school_class_id')->nullable()->nullOnDelete();            
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

@@ -16,7 +16,7 @@
                 <li><x-navlink href="/hirfolyam" match="hirfolyam*">Hírfolyam</x-navlink></li>
             </ul>
             <ul>
-                <li><x-navlink href="">{{ auth()->user()->first_name }}</x-navlink></li>
+                <li><x-navlink href="/profil">{{ auth()->user()->first_name }}</x-navlink></li>
                 <li><x-navlink href="/uzenetek" match="uzenet*">Üzenetek</x-navlink></li>
                 <li><x-navlink href="/logout">Kijelentkezés</x-navlink></li>
                 @if(auth()->user()->username === 'Admin')
