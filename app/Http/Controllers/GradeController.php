@@ -32,7 +32,7 @@ class GradeController extends Controller
 
     public function show(int $classId, int $userId){
         // Tiltás azellen hogy diák, másik diák jegyeit nézhesse meg
-        if (auth()->user()->role === 'student' && $studentId != auth()->id()) {
+        if (auth()->user()->role->value === 'student' && $userId != auth()->id()) {
             abort(403);
         }
 
@@ -41,10 +41,12 @@ class GradeController extends Controller
 
         $teacher = auth()->user();
 
+        $editedBy = Grade::whereNotNull('edited_by')->get()->keyBy('id');
+
         $gradesByMonthAndSubject =
             $this->gradeService->getGradesByMonthAndSubject($student);
                         
-        return view('grade.show', compact('student', 'gradesByMonthAndSubject', 'teacher'));
+        return view('grade.show', compact('student', 'gradesByMonthAndSubject', 'teacher', 'editedBy'));
     }
 
     public function store(GradeRequest $gradeRequest){

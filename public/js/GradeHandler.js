@@ -47,6 +47,7 @@ class GradeHandler{
         this.closeButton.addEventListener('click', () => {
             this.ClearGradeValues();
             this.chooseWindow.style.display = "none";
+            this.CloseWindow();
         });
     };
 
@@ -143,6 +144,11 @@ class GradeHandler{
         this.gradeInput.value = 0;
 
         this.GradeWindow.style.display = "none";
+        this.gradeSaveButton.textContent = "Jegy rögzítése";
+        this.gradeDescriptionInput.value = "";
+        this.gradeform.action = "";
+
+        this.ClearGradeValues();
     }
 
     ShowHelp(){

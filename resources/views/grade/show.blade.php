@@ -87,7 +87,7 @@
     </div>
 
     <x-choose />
-    <x-editgrade editedby="{{$teacher->first_name}} {{$teacher->last_name}}"/>
+    <x-editgrade />
 
     <script type="module" src="{{ asset('js/GradeHandler.js') }}" >
     </script>

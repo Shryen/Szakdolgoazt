@@ -505,9 +505,7 @@ form:has(#search) button{
 }
 
 .grades-table .subject-header {
-    position: sticky;
     left: 0;
-    z-index: 3;
 
     text-align: left;
     min-width: 180px;
@@ -516,9 +514,7 @@ form:has(#search) button{
 }
 
 .grades-table .subject-name {
-    position: sticky;
     left: 0;
-    z-index: 2;
 
     min-width: 180px;
     padding: 14px 18px;
