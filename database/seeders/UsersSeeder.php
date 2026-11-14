@@ -37,6 +37,7 @@ class UsersSeeder extends Seeder
                 $studentNumber = $index + 1;
                 $username = "student_{$schoolClass->id}_{$studentNumber}";
 
+
                 User::updateOrCreate(
                     ['username' => $username],
                     [
