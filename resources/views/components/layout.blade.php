@@ -16,11 +16,11 @@
                 <li><x-navlink href="/hirfolyam" match="hirfolyam*">Hírfolyam</x-navlink></li>
             </ul>
             <ul>
-                <li><x-navlink href="/profil">{{ auth()->user()->first_name }}</x-navlink></li>
+                <li><x-navlink href="/profil">{{ auth()->user()->first_name }} profilja</x-navlink></li>
                 <li><x-navlink href="/uzenetek" match="uzenet*">Üzenetek</x-navlink></li>
                 <li><x-navlink href="/logout">Kijelentkezés</x-navlink></li>
                 @if(auth()->user()->username === 'Admin')
-                    <li><x-navlink href="/admin" match="admin*">Admin panel</x-navlink></li>
+                    <li><x-navlink href="/admin" match="admin*">Tanári felület</x-navlink></li>
                 @endif
             </ul>
         </nav>

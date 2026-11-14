@@ -72,8 +72,8 @@ class MessageController extends Controller
 
         $otherUser = User::findOrFail($id);
 
-        $chatMessages = Message::where(['sender_id' => $me, 'receiver_id' => $id])
-            ->orWhere(['sender_id' => $id, 'receiver_id' => $me])
+        $chatMessages = Message::where(fn ($q) => $q->where('sender_id', $me)->where('receiver_id', $id))
+            ->orWhere(fn ($q) => $q->where('sender_id', $id)->where('receiver_id', $me))
             ->latest()
             ->get();
 

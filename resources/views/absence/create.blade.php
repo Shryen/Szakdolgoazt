@@ -1,37 +1,42 @@
 <x-layout>
-    <x-admin>  
+    <x-admin>
+        @php($days = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek'])
+
         <div class="absence-table">
 
-        @if($currentWeek)
-            <div class="absence-table-time">
-                <strong>{{ $currentWeek->week_number }}. hét</strong>
-                {{ $currentWeek->start_date->format('Y.m.d') }} - {{ $currentWeek->end_date->format('Y.m.d') }}
-            </div>
-        @else
-            <div class="error">
-                Úgy tűnik ezen a héten nincsenek óráid.
-            </div>
-        @endif
-
-
-            @forelse($lessons as $lesson)
-                <div class="absence-table-lessons">
-                    <a href="/hianyzas/{{$lesson->id}}">
-                        <p>{{ $lesson->subject->name }}</p>
-                           <p>
-                                <strong>Osztály:</strong> {{ $lesson->schoolClass->name }}<br>
-                                <strong>Nap:</strong>
-                                @php
-                                    $days = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap'];
-                                @endphp
-                                {{ $days[$lesson->day_of_week] }}<br>
-                                <strong>Idő:</strong> {{ $lesson->start_time->format('H:i') }} - {{ $lesson->end_time->format('H:i') }}
-                            </p>
-                    </a>
+            @if($currentWeek)
+                <div class="absence-table-time">
+                    <strong>{{ $currentWeek->week_number }}. hét</strong>
+                    <span>{{ $currentWeek->start_date->format('Y.m.d.') }} - {{ $currentWeek->end_date->format('Y.m.d.') }}</span>
                 </div>
-            @empty
-                <p>Úgy tűnik ezen a héten nincsenek óráid</p>
-            @endforelse
-        </div>    
+            @endif
+
+            @if($lessons->isEmpty())
+                <p class="error">Úgy tűnik, ezen a héten nincsenek óráid.</p>
+            @else
+                @php($byDay = $lessons->groupBy('day_of_week'))
+
+                <div class="absence-week">
+                    @foreach($days as $i => $name)
+                        <div @class(['absence-day', 'today' => now()->dayOfWeekIso - 1 === $i])>
+                            <h3 class="absence-day-name">{{ $name }}</h3>
+
+                            @forelse(($byDay->get($i) ?? collect())->sortBy(fn ($l) => $l->start_time->format('H:i')) as $lesson)
+                                <a href="/hianyzas/{{ $lesson->id }}" class="absence-table-lessons">
+                                    <span class="absence-lesson-time">
+                                        {{ $lesson->start_time->format('G:i') }}&nbsp;-&nbsp;{{ $lesson->end_time->format('G:i') }}
+                                    </span>
+                                    <span class="absence-lesson-subject">{{ $lesson->subject->name }}</span>
+                                    <span class="absence-lesson-class">{{ $lesson->schoolClass->name }}</span>
+                                </a>
+                            @empty
+                                <p class="absence-day-empty">–</p>
+                            @endforelse
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+        </div>
     </x-admin>
 </x-layout>

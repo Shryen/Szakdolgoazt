@@ -7,7 +7,11 @@
 
         @if($grid->isEmpty())
             <p class="student-empty">
-                {{ $classId ? 'Még nincs órarend felvéve.' : 'Nem vagy osztályba sorolva, ezért nincs órarended.' }}
+                @if($isStudent && ! $classId)
+                    Nem vagy osztályba sorolva, ezért nincs órarended.
+                @else
+                    Még nincs órarend felvéve.
+                @endif
             </p>
         @else
             <div class="student-table-wrapper">
@@ -28,8 +32,16 @@
                                 <th>
                                     {{ $row->first()->start_time->format('G:i') }}&nbsp;-&nbsp;{{ $row->first()->end_time->format('G:i') }}
                                 </th>
-                                @foreach(range(1, 5) as $day)
-                                    <td>{{ $row->get($day)?->subject?->name }}</td>
+                                @foreach(range(0, 4) as $day)
+                                    @php($lesson = $row->get($day))
+                                    <td>
+                                        @if($lesson)
+                                            <span class="timetable-subject">{{ $lesson->subject?->name }}</span>
+                                            @unless($isStudent)
+                                                <span class="timetable-class">{{ $lesson->schoolClass?->name }}</span>
+                                            @endunless
+                                        @endif
+                                    </td>
                                 @endforeach
                             </tr>
                         @endforeach

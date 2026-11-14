@@ -18,6 +18,7 @@
             @else
                 <a href="/jegyek" class="profile-link">Jegyek beírása</a>
                 <a href="/hianyzas" class="profile-link">Órarend és hiányzások</a>
+                <a href="/profil/orarend" class="profile-link">Órarendem</a>
             @endif
             <a href="/uzenetek" class="profile-link">Üzenetek</a>
         </div>

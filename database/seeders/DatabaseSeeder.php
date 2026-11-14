@@ -35,26 +35,14 @@ class DatabaseSeeder extends Seeder
                 'password' => 'Admin',
             ]
         );
-
-        User::updateOrCreate(
-            ['username' => 'test.user'],
-            [
-                'first_name' => 'Test',
-                'last_name' => 'User',
-                'mothers_name' => 'Test Mother',
-                'address' => 'Test address',
-                'om_id' => '00000000001',
-                'role' => RoleEnum::STUDENT,
-                'email' => 'test@example.com',
-                'password' => 'password',
-            ]
-        );
-
+        
         $this->call([
             UsersSeeder::class,
+            TestUserSeeder::class,
             LessonsSeeder::class,
             PostsSeeder::class,
             MessagesSeeder::class,
+            AdminLessonsSeeder::class,
         ]);
     }
 }

@@ -24,18 +24,25 @@ class ProfileController extends Controller
     }
 
     public function timetable()
-    {
-        $classId = auth()->user()->school_class_id;
+{
+    $user = auth()->user();
+    $isStudent = $user->role->value === 'student';
 
-        // $grid['08:00'][2] = a kedd 8:00-s óra
-        $grid = Lesson::with('subject')
-            ->where('school_class_id', $classId)
-            ->orderBy('start_time')
-            ->get()
-            ->groupBy(fn ($lesson) => $lesson->start_time->format('H:i'))
-            ->map(fn ($row) => $row->keyBy('day_of_week'));
+    $grid = Lesson::with(['subject', 'schoolClass'])
+        ->when($isStudent,
+            fn ($q) => $q->where('school_class_id', $user->school_class_id),
+            fn ($q) => $q->where('teacher_id', $user->id)
+        )
+        ->orderBy('start_time')
+        ->get()
+        ->groupBy(fn ($lesson) => $lesson->start_time->format('H:i'))
+        ->map(fn ($row) => $row->keyBy('day_of_week'));
 
-        return view('profile.timetable', compact('grid', 'classId'));
-    }
+    return view('profile.timetable', [
+        'grid'      => $grid,
+        'isStudent' => $isStudent,
+        'classId'   => $user->school_class_id,
+    ]);
+}
 
 }

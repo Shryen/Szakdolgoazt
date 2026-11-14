@@ -4,6 +4,7 @@
         <x-navlink href="/hirfolyam/letrehozas">Hír létrehozása</x-navlink>
         <x-navlink href="/jegyek" match="jegyek*">Jegyek beírása</x-navlink>
         <x-navlink href="/hianyzas" match="hianyzas*">Hiányzások</x-navlink>
+        <x-navlink href="/profil/orarend">Órarend</x-navlink>
     </div>
     <div class="admin-content">
         {{$slot}}

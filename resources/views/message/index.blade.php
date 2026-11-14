@@ -10,14 +10,14 @@
         <aside class="message-list">
             @foreach($conversations as $conversation)
                 @php
-                    $partner = $conversation->sender_id === auth()->id()
+                    $partner = $conversation->sender_id == auth()->id()
                         ? $conversation->receiver
                         : $conversation->sender;
                 @endphp
                 <a href="/uzenet/{{ $partner->id }}"
-                   class="message-list-item {{ isset($otherUser) && $otherUser->id === $partner->id ? 'active' : '' }}">
+                   class="message-list-item {{ isset($otherUser) && $otherUser->id == $partner->id ? 'active' : '' }}">
                     <span class="message-list-name">{{ $partner->first_name }} {{ $partner->last_name }}</span>
-                    <span class="message-list-preview">{{ \Illuminate\Support\Str::limit($conversation->body, 40) }}</span>
+                    <span class="message-list-preview">{{ \Illuminate\Support\Str::limit($conversation->content, 40) }}</span>
                 </a>
             @endforeach
         </aside>
@@ -32,7 +32,7 @@
                 {{-- $chatMessages: legújabb elöl (latest()) --}}
                 <div class="chat-messages">
                     @foreach($chatMessages as $message)
-                        <div class="bubble {{ $message->sender_id === auth()->id() ? 'sent' : 'received' }}">
+                        <div class="bubble {{ $message->sender_id == auth()->id() ? 'sent' : 'received' }}">
                             {{ $message->content }}
                         </div>
                     @endforeach
