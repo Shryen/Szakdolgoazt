@@ -53,6 +53,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersSeeder::class,
             LessonsSeeder::class,
+            PostsSeeder::class,
+            MessagesSeeder::class,
         ]);
     }
 }
